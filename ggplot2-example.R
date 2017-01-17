@@ -91,3 +91,4 @@ g <- ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, frame = year)) +
 warnings(g)
 
 gganimate(g, interval=0.2)
+
