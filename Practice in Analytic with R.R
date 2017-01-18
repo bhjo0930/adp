@@ -30,10 +30,10 @@ fib(1)
 
 fib <- function(n) {
   if (n == 0 || n == 1) {
-    print(c('n val: ',n))
+#    print(c('n val: ',n))
     return(1)
   }
-  if (n > 1) {
+  if (n >= 2) {
     return(fib(n-1) + fib(n-2))
   }
 }
@@ -42,3 +42,29 @@ expect_equal(1, fib(1))
 
 
 
+# test_that을 사용한 테스트 그룹화
+#testthat::test_that : 테스트를 생성한다.
+test_that::test_that(
+  desc,  # 테스트 이름
+  code   # 테스트 코드
+)
+
+test_that("base case", {
+  expect_equal(1, fib(0))
+  expect_equal(1, fib(1))
+})
+
+
+test_that("recursion test", {
+  expect_equal(2, fib(2))
+  expect_equal(3, fib(3))
+  expect_equal(5, fib(4))
+})
+
+
+
+## 테스트 파일 구조
+# trun_tests.R cka
+
+
+## 
