@@ -1,0 +1,22 @@
+---
+title: "Ch6-1 산점도"
+output: html_notebook
+---
+
+
+```{r include=FALSE}
+library(mlbench)
+data(Ozone)
+plot(Ozone$V8, Ozone$V9)
+```
+
+
+```{sql connection=}
+
+```
+
+
+```{python}
+var a=1
+```
+
