@@ -1,0 +1,56 @@
+---
+title: "Ch5-9 코드 프로파일링"
+output: html_notebook
+---
+
+코드 프로파일링은 Rprof( ) 함수 호출로 시작한다. Rprof( ) 호출 이후에는 특정 시간 간격마다 현재 어떤 함수가 수행 중인지 샘플이 추출되어 파일에 저장된다. 파일에 기록된 결과는 이후 summaryRprof( ) 함수로 분석할 수 있다.
+
+Rprof(
+  # 프로파일링 정보를 저장할 파일. 파일명이 지정되면 프로파일링이 시작되고
+  # NULL이 지정되면 프로파일링이 중단된다.
+  filename="Rprof.out",
+  append=FALSE,  # 결과 파일에 프로파일링 정보를 덧붙일지 여부. FALSE면 파일을 덮어쓴다.
+  interval=0.02  # 프로파일링을 위한 샘플을 채취하는 시간 간격
+)
+
+summaryRprof(
+  filename  # 프로파일링 정보가 저장된 파일
+)
+
+
+
+```{r}
+add_one <- function(val) {
+ return(val + 1)
+}
+
+add_one_to_vec <- function(x) {
+ for (i in seq_along(x)) {
+   x[i] <- add_one(x[i])
+ }
+ return(x)
+}
+
+Rprof("add_one.out")
+x <- add_one_to_vec(1:1000000)
+head(x)
+
+Rprof(NULL)
+
+```
+
+```{r}
+summaryRprof("add_one.out")
+```
+
+summaryRprof( )의 분석 결과는 크게 by.self와 by.total 두 섹션으로 나뉘는데, 이 두 섹션에 들어 있는 내용은 동일하다. 다만 by.self는 self.time으로 정렬된 표이고, by.total은 total.time으로 정렬된 표다
+
+```{r}
+summaryRprof("add_one.out")$by.self
+```
+
+selt.time 은 해당 코드가 수행되는데 걸린 시간
+total.time 은 하위 코드를 포함하여 수행되는데 걸린 시간
+
+
+

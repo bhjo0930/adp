@@ -9,12 +9,12 @@ mainfont: NanumGothic
 ---
 
 ```{r}
-install.packages("doParallel")
+#install.packages("doParallel")
 library(doParallel)
 registerDoParallel(cores=4)
 ```
 
 ```{r}
-
+#
 ```
 

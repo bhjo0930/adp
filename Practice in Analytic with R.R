@@ -114,3 +114,35 @@ sum_to_ten()
 
 # browser( )가 호출되면 명령의 수행이 중지되고, 해당 시점부터 디버깅 모드가 시작된다. 디버깅 모드가 되면 browser( )가 호출된 행에서 접근 가능한 변수 및 함수의 내용을 볼 수 있으며, 코드를 한 행씩 실행하거나 다시 browser( )가 호출될 때까지 명령의 실행을 재개할 수 있다.
 
+sum_to_ten <- function() {
+  sum <- 0
+  for (i in 1:10) {
+    sum <- sum + i
+    if (i >= 5) {
+      browser()
+    }
+  }
+  return(sum)
+}
+
+sum_to_ten()
+
+library(plyr)
+ddply(iris, .(Species), function(rows) { browser() })
+
+#코드 수행 시간 측정
+#system.time( )을 사용해 간단히 함수의 수행 시간을 출력해보는 방법과 Rprof( ) 함수를 사용해 좀 더 본격적인 보고서를 출력해보는 방법
+#user: 각각 프로그램 코드 자체를 수행하는 데 걸린 시간
+#system: 프로그램이 운영체제의 명령을 호출했다면 그때 운영체제가 명령을 수행하는 데 걸린 시간
+#elapsed: 코드를 시작한 직후부터 코드 수행이 끝날 때까지의 시간을 초시계로 쟀을 때 얼마나 걸렸는지
+
+sum_to_n <- function(n) {
+  sum <- 0
+  for (i in 1:n) {
+    sum <- sum + i
+  }
+  return(sum)
+}
+
+system.time(sum_to_n(10000000))
+
